@@ -58,11 +58,13 @@
     
    <div class="container"> 
     <div class="form"> 
-      <h2>LOGIN to CodePen</h2>
-      <form action="">
+      <h2>Login to Chatroom</h2>
+
+      <form action="" method="post">
+
         <div class="inputBx">
-          <input type="text" required="required">
-          <span>Login</span>
+          <input type="text" name="username" required="required">
+          <span>Username</span>
           <i class="fas fa-user-circle"></i>
         </div>
         <div class="inputBx password">
@@ -71,14 +73,13 @@
           <a href="#" class="password-control" onclick="return show_hide_password(this);"></a>
           <i class="fas fa-key"></i>
         </div>
-        <label class="remember"><input type="checkbox">
-          Remember</label>
+        
         <div class="inputBx">
           <input type="submit" value="Log in" disabled> 
         </div>
       </form>
-      <p>Forgot password? <a href="#">Click Here</a></p>
-      <p>Don't have an account <a href="#">Sign up</a></p>
+      
+      <p>Don't have an account <a href="./register.php">Sign up</a></p>
     </div>
   </div>
     
