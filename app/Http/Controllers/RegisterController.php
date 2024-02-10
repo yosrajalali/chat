@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 session_start();
 
-
-class LoginController {
+class RegisterController {
 
     public function index(){
 
-    require_once './views/auth/login.php';
+    require_once './views/auth/register.php';
   }
 
 }

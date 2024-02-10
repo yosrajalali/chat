@@ -7,7 +7,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatController;
 
 
-Route::get('/', [LoginController::class, 'create']);
+Route::get('/', [LoginController::class, 'index']);
+
+Route::get('/register/index', [RegisterController::class, 'index']);
 
 // Route::get('/chats/index', [ChatController::class, 'index']);
 // Route::get('/chats/show', [ChatController::class, 'show']);
