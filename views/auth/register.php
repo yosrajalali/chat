@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="wrapper">
-    <form action="" method="post">
+    <form action="/register/store" method="post">
         <h1>Sign up</h1>
         <div class="input">
             <input type="text" name="name" placeholder="Name" >

@@ -10,6 +10,7 @@ use App\Http\Controllers\ChatController;
 Route::get('/', [LoginController::class, 'index']);
 
 Route::get('/register/index', [RegisterController::class, 'index']);
+Route::post('/register/store', [RegisterController::class, 'store']);
 
 // Route::get('/chats/index', [ChatController::class, 'index']);
 // Route::get('/chats/show', [ChatController::class, 'show']);
@@ -24,5 +25,5 @@ Route::get('/register/index', [RegisterController::class, 'index']);
 // Route::get('/login/create', [LoginController::class, 'create']);
 // Route::post('/login/store', [LoginController::class, 'store']);
 
-// Route::get('/register/create', [RegisterController::class, 'create']);
-// Route::post('/register/store', [RegisterController::class, 'store']);
+
+

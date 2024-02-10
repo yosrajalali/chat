@@ -18,4 +18,12 @@ class DatabaseService{
     $this->builder = new QueryBuilder($this->connection);
   }
 
+  public function getUsers(){
+
+    return $this->builder->table('users')
+    ->select()
+    ->execute()
+    ->fetchAll(PDO::FETCH_OBJ);
+  }
+
 }

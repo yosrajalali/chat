@@ -11,4 +11,8 @@ class RegisterController {
     require_once './views/auth/register.php';
   }
 
+  public function store(){
+    
+  }
+
 }

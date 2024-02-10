@@ -136,5 +136,4 @@ class QueryBuilder implements QueryBuilderInterface{
 
   }
 
-
 }
