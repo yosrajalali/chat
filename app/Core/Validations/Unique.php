@@ -7,6 +7,7 @@ use App\Core\Validations\Contracts\RuleInterface;
 use App\Core\Database\QueryBuilder;
 use App\Core\Database\Connection;
 use App\Core\Database\DatabaseService;
+use App\Core\Database\Services;
 use PDO;
 
 
@@ -27,7 +28,8 @@ class Unique extends BaseRule implements RuleInterface{
     // ->select()
     // ->execute()
     // ->fetchAll(PDO::FETCH_OBJ);
-    $services = new DatabaseService;
+
+    $services = new Services;
     $this->users = $services->getUsers();
 
     foreach ($this->users as $user) {

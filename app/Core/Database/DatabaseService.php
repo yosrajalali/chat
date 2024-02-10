@@ -5,12 +5,11 @@ use App\Core\Database\QueryBuilder;
 use App\Core\Database\Connection;
 use PDO;
 
-class DatabaseService{
+abstract class DatabaseService{
   
   protected Connection $connection;
   protected QueryBuilder $builder;
 
-  // change the name to builder
   public function builder(){
     
     $this->connection = Connection::getInstance();
@@ -18,12 +17,9 @@ class DatabaseService{
     $this->builder = new QueryBuilder($this->connection);
   }
 
-  public function getUsers(){
+  public function getBuilder(){
 
-    return $this->builder->table('users')
-    ->select()
-    ->execute()
-    ->fetchAll(PDO::FETCH_OBJ);
+    return $this->builder;
+    
   }
-
 }
