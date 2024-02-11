@@ -10,8 +10,6 @@ use PDO;
 
 class ChatController extends DatabaseService{
 
-  // don't forget to separate concerns⚠️
-
   public function __construct()
   {
       parent::builder();
@@ -20,6 +18,7 @@ class ChatController extends DatabaseService{
 
   public function index(){
 
+    
     $chatrooms = $this->builder
     ->table('rooms')
     ->select()
@@ -31,10 +30,13 @@ class ChatController extends DatabaseService{
 
   public function show(){
 
-    $services =new Services();
+    $services = new Services();
     $messages = $services->getMessagesData($_GET['room_id']);
   //  this is messages join with rooms and users
-    
+
+    $chatrooms = $services->getChatrooms();
+    $room = $services->getRoomById($_GET['room_id']);
+    // dd($room->name);
     require_once './views/chats/show.php';
   }
 
@@ -55,9 +57,6 @@ class ChatController extends DatabaseService{
     }
    
   }
-
-  
-  public function create(){}
 
   public function edit(){
 

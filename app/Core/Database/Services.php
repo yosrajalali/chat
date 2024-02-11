@@ -55,4 +55,22 @@ class Services extends DatabaseService {
     ->execute()
     ->fetchAll(PDO::FETCH_OBJ);
   }
+
+  public function getChatrooms(){
+
+    return $this->builder
+    ->table('rooms')
+    ->select()
+    ->execute()
+    ->fetchAll();
+  }
+
+  public function getRoomById($roomId){
+    return $this->builder
+    ->table('rooms')
+    ->select()
+    ->where('id', $roomId, '=')
+    ->execute()
+    ->fetch();
+  }
 }
