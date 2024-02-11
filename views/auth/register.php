@@ -15,7 +15,7 @@
     <form id="registerForm" action="/register/store" method="post">
         <h1>Sign up</h1>
         <div class="input">
-            <input type="text" name="name" placeholder="Name" >
+            <input type="text" name="name" placeholder="Name">
         </div>
 
         <?php foreach($errors['name'] as $nameError): ?>
@@ -24,7 +24,7 @@
         <?php endforeach; ?>
 
         <div class="input">
-            <input type="text" name="username" placeholder="Username">
+            <input id="nameInput" type="text" name="username" placeholder="Username">
         </div>
 
         <?php foreach($errors['username'] as $usernameError): ?>
@@ -42,7 +42,7 @@
         <?php endforeach; ?>
 
         <div class="input">
-            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="password" placeholder="Password" >
         </div>
 
         <?php foreach($errors['password'] as $passwordErrors): ?>

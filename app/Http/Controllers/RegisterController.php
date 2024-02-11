@@ -72,7 +72,7 @@ class RegisterController extends DatabaseService {
         'password'=>$_REQUEST['password']
       ];
 
-      header('Location: / ');
+      header('Location: /?status=succuss ');
     }
     if(isset($_POST['submit']) && !empty(self::$errors)){
 

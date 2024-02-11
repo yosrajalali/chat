@@ -253,3 +253,16 @@ section {
   margin-bottom: 10px;
   cursor: pointer;
 }
+
+.succuss_msg{
+  text-align: center;
+  background-color: rgba(44, 44, 44, .4);
+  padding: .4rem;
+  margin-bottom: .4rem;
+  border-radius: .1rem;
+}
+
+.invalid_err{
+  text-align: center;
+  color: red;
+}

@@ -58,9 +58,15 @@
     
    <div class="container"> 
     <div class="form"> 
+      <?php if($_GET['status'] === 'succuss'):?>
+        <p class="succuss_msg">Acount Created Succussfully</p>
+      <?php endif;?>
+      
+      <p class="invalid_err"><?=$errors?></p>
+
       <h2>Login to Chatroom</h2>
 
-      <form action="" method="post">
+      <form action="/login/store" method="post">
 
         <div class="inputBx">
           <input type="text" name="username" required="required">
@@ -75,7 +81,7 @@
         </div>
         
         <div class="inputBx">
-          <input type="submit" value="Log in" disabled> 
+          <input type="submit" name="submit" value="Log in"> 
         </div>
       </form>
       
