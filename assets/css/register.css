@@ -63,3 +63,8 @@ p {
 ::placeholder {
   color: #fff
 }
+
+
+.error_red{
+  color: red;
+}

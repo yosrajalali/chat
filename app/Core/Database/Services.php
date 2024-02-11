@@ -17,15 +17,6 @@ class Services extends DatabaseService {
       parent::builder();
   }
 
-  public function setErrors($errors){
-    
-    self::$errors = $errors;
-  }
-
-  public function getErrors(){
-    return self::$errors;
-  }
-
   public function getUsers()
   {
     return $this->builder->table('users')

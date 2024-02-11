@@ -10,6 +10,7 @@ use App\Core\Validations\Length;
 use App\Core\Validations\PasswordLength;
 use App\Core\Validations\NameValidChars;
 use App\Core\Validations\UsernameValidChars;
+use App\Core\Validations\ValidEmail;
 use App\Core\Validations\Validation;
 use DOMCdataSection;
 
@@ -26,11 +27,16 @@ class RegisterController extends DatabaseService {
   
 
   public function index(){
+    
+    if(isset($_SESSION['signup_errors'])){
 
-    $services = new Services();
-    $errors = $services->getErrors();
+      $errors = $_SESSION['signup_errors'];
+    }
 
     require_once './views/auth/register.php';
+
+    unset($_SESSION['signup_errors']);
+
   }
 
   public function store(){
@@ -39,7 +45,7 @@ class RegisterController extends DatabaseService {
 
       'name'=>[new Required, new Length, new NameValidChars],
       'username'=>[new Required,new Unique, new Length, new UsernameValidChars],
-      'email'=>[new Required, new Unique],
+      'email'=>[new Required, new Unique, new ValidEmail],
       'password'=>[new Required, new PasswordLength]
     ];
      
@@ -59,10 +65,6 @@ class RegisterController extends DatabaseService {
 
       $services = new Services;
       $services->insertUser($fields);
-     
-      //   $this->builder->table('users')
-      // ->insert(array_slice($_REQUEST, 0, -1))
-      // ->bindExecute(array_values(array_slice($_REQUEST, 0, -1)));
 
       // set session to authenticate the user 
       $_SESSION['user']=[
@@ -73,10 +75,9 @@ class RegisterController extends DatabaseService {
       header('Location: / ');
     }
     if(isset($_POST['submit']) && !empty(self::$errors)){
-      $services = new Services;
-      $services->setErrors(self::$errors);
-    
-      $this->index();
+
+      $_SESSION['signup_errors'] = self::$errors;
+      header('Location: /register/index ');
     }
   }
 }

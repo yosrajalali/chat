@@ -20,15 +20,6 @@ class Unique extends BaseRule implements RuleInterface{
     // key= username, email
     // value = whatever user enters into username and email inputs
 
-    $connection = Connection::getInstance();
-    $connection->setPdo(new PDO('mysql:host=localhost;dbname=chat', 'root'));
-    $builder = new QueryBuilder($connection);
-
-    // $this->users = $builder->table('users')
-    // ->select()
-    // ->execute()
-    // ->fetchAll(PDO::FETCH_OBJ);
-
     $services = new Services;
     $this->users = $services->getUsers();
 
@@ -44,9 +35,7 @@ class Unique extends BaseRule implements RuleInterface{
 
   public function message(string $key): string
   {
-    return "{$key} must be unique";
+    return "{$key} already exists";
   }
 
-  // left off
-//  we need values of users aray here
 }
