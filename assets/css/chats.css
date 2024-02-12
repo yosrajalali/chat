@@ -214,10 +214,49 @@ top: 30px;
 right: 15px;
 display: none;
 }
+
+.msg_actions{
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.msg_actions ul{
+  position: absolute;
+  top: -4px;
+  right: -60px;
+  list-style: none;
+  margin: 0;
+}
 .action_menu ul{
 list-style: none;
 padding: 0;
 margin: 0;
+}
+
+.delete_btn{
+  background: none;
+  border: none;
+  color: white;
+  padding: 0;
+  cursor: pointer;
+}
+
+.edit_link{
+  color: white;
+  cursor: pointer;
+}
+.edit_link:hover{
+  color: white;
+  text-decoration: none;
+}
+
+.hide{
+  display: none;
+}
+
+.show{
+  display: block;
 }
 .action_menu ul li{
 width: 100%;
@@ -258,4 +297,25 @@ margin-bottom: 15px !important;
   color: #495057;
   background-color: #fff;
   border-radius: 0.25rem;
+}
+
+
+.edit_form{
+  margin-left: .4rem;
+  margin-top: .4rem;
+}
+
+.edit_input{
+  background-color: transparent;
+  border: 1px solid #82ccdd;
+  border-radius: .3rem;
+}
+.edit_input:focus{
+  border: 1px solid #82ccdd;
+}
+.submit_edit_input{
+  background-color: transparent;
+  border-radius: .3rem;
+  background: rgba(44, 44, 44, .4);
+  border: none;
 }

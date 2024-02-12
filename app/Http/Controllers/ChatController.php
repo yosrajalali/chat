@@ -76,7 +76,7 @@ class ChatController extends DatabaseService{
     ->where('id', $_GET['id'], '=')
     ->bindExecute([$_POST['content']]);
 
-    // header('Location: ' . $_SERVER['HTTP_REFERER']);
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
   }
 
   public function delete(){

@@ -17,17 +17,28 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <script>
-    	$(document).ready(function(){
-      $('#action_menu_btn').click(function(){
-        $('.action_menu').toggle();
-      });
-        });
-  </script>
+	<!-- <script>
+				$(document).ready(function(){
+				$('.edit_form').submit(function(event){
+				event.preventDefault(); 
 
-<!------ Include the above in your HEAD tag ---------->
+				var formData = $(this).serialize(); // Serialize form data
+
+				$.ajax({
+					type: 'POST',
+					url: '/chats/update?id=<?=$message->id?>', // Specify the URL of the server-side script
+					data: formData,
+					success: function(response) {
+						$('#messageContent').text(response); // Update the content on the page
+						$('.edit_form').hide(); // Hide the form after successful update
+					}
+				});
+			});
+		});
+
+	</script> -->
+
 	</head>
-	<!--Coded With Love By Mutiullah Samim-->
 	<body>
 		<div class="container-fluid h-100">
 			<div class="row justify-content-center h-100">
@@ -88,16 +99,38 @@
 
             <?php foreach ($messages as $message): ?>
 
-              <div class="d-flex justify-content-start mb-4">
+              <div class="d-flex justify-content-start mb-4 common_ancestor">
 								<div class="img_cont_msg">
 									<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
                   <p class="send_by"><?=$message->username?></p>
 								</div>
                 
-								<div class="msg_cotainer">
-                <?= $message->content ?>
+								<div class="msg_cotainer msg_container">
+									<?= $message->content ?>
 									<span class="msg_time"><?=date("h:i:sa") ?></span>
+
+									<div class="msg_actions">
+										
+										<ul>
+											<li>
+												<form action="/chats/delete?id=<?=$message->message_id?>" method="post">
+													<input type="hidden" name="message_id" value="<?= $message->message_id ?>">
+													<input class="delete_btn" type="submit" value="Delete">
+												</form>
+											</li>
+
+											<li class="edit_action edit_link">
+												Edit
+											</li>
+										</ul>
+									</div>
 								</div>
+
+								<form action="/chats/update?id=<?=$message->message_id?>" method="post" class="edit_form hide">
+								<!-- <textarea class="edit_input" name="content" ><?= $message->content ?></textarea> -->
+									<input class="edit_input" type="text" name="content" value="<?= $message->content ?>">
+      						<input class="submit_edit_input" type="submit" name="submit" value="Update">
+								</form>
 							</div>
 
             <?php endforeach; ?>
@@ -110,23 +143,14 @@
 								<div class="img_cont_msg">
 							<img src="../../assets/images/profile.jpg" class="rounded-circle user_img_msg">
 								</div>
-							</div>
-					
-							<div class="d-flex justify-content-end mb-4">
-								<div class="msg_cotainer_send">
-									Ok, thank you have a good day
-									<span class="msg_time_send">9:10 AM, Today</span>
-								</div>
-								<div class="img_cont_msg">
-						<img src="" class="rounded-circle user_img_msg">
-								</div>
-							</div>
+						</div>
+				
 						
 						</div>
 
             <div class="card-footer">
 
-            <form class="input-group" action="/chats/store?room_id=<?= $_GET['room_id'] ?>"       method="post" enctype="multipart/form-data">
+            <form class="input-group" action="/chats/store?room_id=<?= $_GET['room_id'] ?>" method="post" enctype="multipart/form-data">
             <div class="input-group-append">
                 
                 <label for="image" class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></label>
@@ -153,6 +177,34 @@
             $('.chatroom-item').removeClass('active'); 
             $(this).addClass('active'); 
         });
-    });
+
+				$('#action_menu_btn').click(function(){
+        $('.action_menu').toggle();
+      });
+
+			$('.msg_container').click(function () {
+
+				$('.msg_actions').not($(this).find('.msg_actions')).hide();
+        $(this).find('.msg_actions').toggle();
+			});
+
+			$('.edit_action').click(function(){
+			
+				var commonAncestor = $(this).closest('.common_ancestor');
+
+				$('.edit_form').not($(this).find('.edit_form')).hide();
+				commonAncestor.find('.edit_form').toggle();
+			});
+
+
+			$(document).on('click', function (event) {
+				// Check if the clicked element is not a .msg_container or a descendant of .msg_container
+				if (!$(event.target).closest('.msg_container').length) {
+						// Hide all .msg_actions
+        $('.msg_actions').hide();
+    	}
+		});		
+		
+	});
 </script>
 </html>
