@@ -319,3 +319,9 @@ margin-bottom: 15px !important;
   background: rgba(44, 44, 44, .4);
   border: none;
 }
+
+.uploaded_img{
+  width: 100px;
+  height: 100px;
+  margin-bottom: 15px;
+}

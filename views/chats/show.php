@@ -17,29 +17,9 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	<!-- <script>
-				$(document).ready(function(){
-				$('.edit_form').submit(function(event){
-				event.preventDefault(); 
-
-				var formData = $(this).serialize(); // Serialize form data
-
-				$.ajax({
-					type: 'POST',
-					url: '/chats/update?id=<?=$message->id?>', // Specify the URL of the server-side script
-					data: formData,
-					success: function(response) {
-						$('#messageContent').text(response); // Update the content on the page
-						$('.edit_form').hide(); // Hide the form after successful update
-					}
-				});
-			});
-		});
-
-	</script> -->
-
 	</head>
 	<body>
+	<img src="./assets/images/user.webp" alt="">
 		<div class="container-fluid h-100">
 			<div class="row justify-content-center h-100">
 				<div class="col-md-4 col-xl-3 chat"><div class="card mb-sm-3 mb-md-0 contacts_card">
@@ -98,19 +78,20 @@
 						<div class="card-body msg_card_body">
 
             <?php foreach ($messages as $message): ?>
-
+							
               <div class="d-flex justify-content-start mb-4 common_ancestor">
 								<div class="img_cont_msg">
 									<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
                   <p class="send_by"><?=$message->username?></p>
+									
 								</div>
                 
 								<div class="msg_cotainer msg_container">
-									<?= $message->content ?>
-									<span class="msg_time"><?=date("h:i:sa") ?></span>
+									<?php if($message->content !== ''){echo $message->content;} ?>
+									
+									<!-- <span class="msg_time"><?=date("h:i:sa") ?></span> -->
 
 									<div class="msg_actions">
-										
 										<ul>
 											<li>
 												<form action="/chats/delete?id=<?=$message->message_id?>" method="post">
@@ -133,34 +114,26 @@
 								</form>
 							</div>
 
+							<?php if($message->image !== '../../assets/images/'): ?>
+								<img class="uploaded_img" src="<?= $message->image;?>" alt="">
+							<?php endif;?>
+
             <?php endforeach; ?>
-						
-							<div class="d-flex justify-content-end mb-4">
-								<div class="msg_cotainer_send">
-									You are welcome
-									<span class="msg_time_send">9:05 AM, Today</span>
-								</div>
-								<div class="img_cont_msg">
-							<img src="../../assets/images/profile.jpg" class="rounded-circle user_img_msg">
-								</div>
-						</div>
-				
-						
+					
 						</div>
 
             <div class="card-footer">
 
             <form class="input-group" action="/chats/store?room_id=<?= $_GET['room_id'] ?>" method="post" enctype="multipart/form-data">
-            <div class="input-group-append">
-                
-                <label for="image" class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></label>
-                
-                <input id="image" name="image" type="file" class="file-input-hidden">
-            </div>
-              <textarea name="content" class="form-control type_msg" placeholder="Type your message..."></textarea>
-              <div class="input-group-append">
-                  <button type="submit" name="submit" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
-              </div>
+
+							<div class="input-group-append">
+									<label for="image" class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></label>
+									<input id="image" name="image" type="file" class="file-input-hidden">
+							</div>
+								<textarea name="content" class="form-control type_msg" placeholder="Type your message..."></textarea>
+								<div class="input-group-append">
+										<button type="submit" name="submit" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
+								</div>
             </form>
 
             </div>

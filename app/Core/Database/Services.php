@@ -37,7 +37,7 @@ class Services extends DatabaseService {
 
     return $this->builder
     ->table('messages')
-    ->select(['messages.content', 'users.username', 'rooms.name', 'rooms.id as room_id, messages.id as message_id'])
+    ->select(['messages.content','messages.image', 'users.username', 'rooms.name', 'rooms.id as room_id, messages.id as message_id'])
     ->join('users','messages.user_id', '=', 'users.id' )
     ->join('rooms','rooms.id', '=', 'messages.room_id' )
     ->where('rooms.id', $roomId, '=')

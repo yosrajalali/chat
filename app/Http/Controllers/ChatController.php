@@ -18,7 +18,6 @@ class ChatController extends DatabaseService{
 
   public function index(){
 
-    
     $chatrooms = $this->builder
     ->table('rooms')
     ->select()
@@ -36,22 +35,45 @@ class ChatController extends DatabaseService{
 
     $chatrooms = $services->getChatrooms();
     $room = $services->getRoomById($_GET['room_id']);
-    // dd($room->name);
+  
     require_once './views/chats/show.php';
   }
 
   public function store(){
 
     $currentTimestamp = date("Y-m-d H:i:s");
+    $user_id = $_SESSION['user']->id;
+    $room_id = $_GET['room_id'];
+    $content = $_POST['content'];
 
-    if(isset($_REQUEST['submit']) && isset($_REQUEST['content']) && !empty($_REQUEST['content'])){
+    if(isset($_REQUEST['submit'])){
 
-      $this->builder->table('messages')
-      ->insert(['user_id'=>'user_id', 'room_id'=>'room_id', 'content'=>'content', 'image'=>'image','created_at'=>'created_at'])
-      ->bindExecute([$_SESSION['user']->id,$_GET['room_id'],$_REQUEST['content'],'image address',$currentTimestamp]);
-      
+      $allowedMimes = ['jpg', 'jpeg', 'txt', 'gif'];
+      $imageMime = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+
+      if(!in_array($imageMime, $allowedMimes)){
+        
         header('Location: /chats/show?room_id=' . $_GET['room_id']);
-    }else{
+      }
+      
+
+      $file_name = $_FILES['image']['name'];
+      $temp_name = $_FILES['image']['tmp_name'];
+      $folder= '../../assets/images/' . $file_name;
+
+      if(!empty($_FILES['image']['name']) || !empty($_POST['content'])){
+
+        $this->builder->table('messages')
+        ->insert(['user_id'=>'user_id', 'room_id'=>'room_id', 'content'=>'content', 'image'=>'image','created_at'=>'created_at'])
+        ->bindExecute([$user_id,$room_id,$content,$folder,$currentTimestamp]);
+        
+          header('Location: /chats/show?room_id=' . $_GET['room_id']);
+        
+      }
+
+    
+    }
+    else{
 
       header('Location: /chats/show?room_id=' . $_GET['room_id']);
     }

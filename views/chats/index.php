@@ -41,6 +41,7 @@
 						</div>
 					</div>
           <div class="card-body contacts_body">
+           
             <ui class="contacts">
                 <?php foreach($chatrooms as $index => $chatroom):?>
                     <li class="chatroom-item" data-index="<?=$index?>">
@@ -75,8 +76,8 @@
                 $(this).removeClass('active');
             },
             click: function(){
-                $('.chatroom-item').removeClass('active'); // Remove active class from all items
-                $(this).addClass('active'); // Add active class to the clicked item
+                $('.chatroom-item').removeClass('active'); 
+                $(this).addClass('active'); 
             }
         });
       });
